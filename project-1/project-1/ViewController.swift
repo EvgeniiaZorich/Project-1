@@ -19,6 +19,7 @@ class ViewController: UITableViewController {
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
         let items = try! fm.contentsOfDirectory(atPath: path)
+//        print(items)
         
         for item in items {
             if item.hasPrefix("nssl") {
@@ -26,6 +27,7 @@ class ViewController: UITableViewController {
             }
         }
         pictures.sort()
+//        print(pictures)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
