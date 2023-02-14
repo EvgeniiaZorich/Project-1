@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UITableViewController {
     var pictures = [String]()
+    var numberOfView = [String: Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,8 @@ class ViewController: UITableViewController {
             }
         }
         pictures.sort()
-//        print(pictures)
+        let userDefaults = UserDefaults.standard
+        numberOfView = userDefaults.object(forKey: "ViewCount") as? [String: Int] ?? [String: Int]()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,13 +38,18 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-        cell.textLabel?.text = pictures[indexPath.row]
+        cell.textLabel?.text = "\(pictures[indexPath.row]) - Views: \(numberOfView[pictures[indexPath.row], default: 0])" 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.selectedImage = pictures[indexPath.row]
+            
+            numberOfView[pictures[indexPath.row], default: 0] += 1
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(numberOfView, forKey: "ViewCount")
+            
             vc.selectedPictureNumber = indexPath.row + 1
             vc.totalPictures = pictures.count
             navigationController?.pushViewController(vc, animated: true)
