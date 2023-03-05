@@ -12,6 +12,7 @@ class DetailViewController: UIViewController {
     var selectedImage: String?
     var selectedPictureNumber = 0
     var totalPictures = 10
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
