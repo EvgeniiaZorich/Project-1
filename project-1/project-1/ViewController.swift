@@ -42,13 +42,11 @@ class ViewController: UITableViewController {
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Bad") as? DetailViewController {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
     
             vc.selectedImage = pictures[indexPath.row]
+ 
             
             numberOfView[pictures[indexPath.row], default: 0] += 1
             let userDefaults = UserDefaults.standard
